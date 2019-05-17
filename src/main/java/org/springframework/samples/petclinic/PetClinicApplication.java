@@ -16,8 +16,12 @@
 
 package org.springframework.samples.petclinic;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.samples.petclinic.service.PetClinicService;
 
 /**
  * PetClinic Spring Boot Application.
@@ -27,9 +31,23 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class PetClinicApplication {
+	
+	@Autowired
+	private PetClinicService servicio;
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(PetClinicApplication.class, args);
+        
     }
-
+    
+    @Bean
+    public CommandLineRunner demoVetRepository() {
+    	
+    	return (args) -> {
+    		
+    		servicio.veterinarios();
+    		
+    	};
+    
+    }
 }
